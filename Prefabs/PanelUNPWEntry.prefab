@@ -5,16 +5,55 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3270538326916517427, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
   m_PrefabInstance: {fileID: 5426817207180715700}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &714779096978637179 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4802115601649805263, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
+  m_PrefabInstance: {fileID: 5426817207180715700}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90bf04378cd013d4ba6f9869de0b805e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7131873039581461559 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3270538326916517427, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
   m_PrefabInstance: {fileID: 5736119148897432068}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &954274164442289611 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4802115601649805263, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
+  m_PrefabInstance: {fileID: 5736119148897432068}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90bf04378cd013d4ba6f9869de0b805e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &7362440054282037794 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6418385258304657647, guid: 4115dc2dedffbd042bc5b88adbccd101, type: 3}
+  m_PrefabInstance: {fileID: 4557092355652252365}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &7362440054282037795 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6418385258304657646, guid: 4115dc2dedffbd042bc5b88adbccd101, type: 3}
   m_PrefabInstance: {fileID: 4557092355652252365}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1859602740245510140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362440054282037794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e04d95c4ed24144ca862b283160ba69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7362440053880256508
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,6 +144,7 @@ GameObject:
   - component: {fileID: 7362440054931285303}
   - component: {fileID: 7362440054931285302}
   - component: {fileID: 2677513875225842507}
+  - component: {fileID: 255941795006310210}
   m_Layer: 5
   m_Name: PanelUNPWEntry
   m_TagString: Untagged
@@ -194,6 +234,22 @@ MonoBehaviour:
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   verticle: 1
+--- !u!114 &255941795006310210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362440054931285296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aad3449119e0da49862897ec3393b95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emailInput: {fileID: 714779096978637179}
+  passwordInput: {fileID: 954274164442289611}
+  confirmButton: {fileID: 0}
+  cancelButton: {fileID: 0}
 --- !u!1001 &4557092355652252365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -422,7 +478,12 @@ PrefabInstance:
       propertyPath: m_Text
       value: Enter email address...
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3270538327828981105, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
+      propertyPath: m_Name
+      value: EmailTextInput
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8356739081849204956, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
 --- !u!1001 &5736119148897432068
 PrefabInstance:
@@ -517,11 +578,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3270538326916517426, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
       propertyPath: m_Name
-      value: PanelUsernameEntry
+      value: PanelPasswordEntry
       objectReference: {fileID: 0}
     - target: {fileID: 3270538327369994763, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
       propertyPath: m_Text
       value: Enter email address...
+      objectReference: {fileID: 0}
+    - target: {fileID: 3270538327828981105, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
+      propertyPath: m_Name
+      value: PasswordTextInput
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
