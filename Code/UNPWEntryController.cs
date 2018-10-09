@@ -6,16 +6,11 @@ using UnityEngine.UI;
 
 namespace DraconianMarshmallows.FirebaseAuthUI
 {
-    public class UNPWEntryController : MonoBehaviour
+    public class UNPWEntryController : UIBehavior
     {
         [SerializeField] private TextInput emailInput;
         [SerializeField] private TextInput passwordInput;
         [SerializeField] private Button confirmButton;
         [SerializeField] private Button cancelButton;
-
-        void Start()
-        {
-
-        }
     }
 }
