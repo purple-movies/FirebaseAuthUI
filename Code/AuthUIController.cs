@@ -31,6 +31,8 @@ namespace DraconianMarshmallows.FirebaseAuthUI
             loginUI.OnNavigation += onClickRegistration;
             registrationUI.OnProceed += onStartRegistration; 
             registrationUI.OnNavigation += onCancelRegistration;
+
+            if (authController.FirebaseReady) onFirebaseReady(); 
         }
 
         private void onFirebaseReady()

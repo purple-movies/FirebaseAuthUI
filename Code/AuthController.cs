@@ -9,9 +9,11 @@ namespace DraconianMarshmallows.FirebaseAuthUI
     {
         public Action<FirebaseUser> OnAuthenticationSuccess { get; internal set; }
         public Action OnFirebaseReady { get; internal set; }
+        public bool FirebaseReady { get; private set; }
 
         private FirebaseApp app;
         private FirebaseAuth auth;
+
         private FirebaseUser currentUser;
 
         protected virtual void Start()
@@ -28,6 +30,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
                     // Set a flag here indicating that Firebase is ready to use by your
                     // application.
                     auth = FirebaseAuth.DefaultInstance;
+                    FirebaseReady = true; 
                     OnFirebaseReady(); 
                     //Debug.Log("Loaded firebase dependencies...");
                 }
