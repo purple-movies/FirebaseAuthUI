@@ -1,12 +1,19 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using Firebase;
+using Firebase.Auth;
 using UnityEngine;
 
 namespace DraconianMarshmallows.FirebaseAuthUI
 {
     public class AuthController : MonoBehaviour
     {
-        void Start()
+        public Action<FirebaseUser> OnAuthenticationSuccess { get; internal set; }
+
+        private FirebaseApp app;
+        private FirebaseAuth auth;
+        private FirebaseUser currentUser;
+
+        protected virtual void Start()
         {
             Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
             {
@@ -14,21 +21,53 @@ namespace DraconianMarshmallows.FirebaseAuthUI
                 if (dependencyStatus == Firebase.DependencyStatus.Available)
                 {
                     // Create and hold a reference to your FirebaseApp, i.e.
-                    //   app = Firebase.FirebaseApp.DefaultInstance;
+                    app = Firebase.FirebaseApp.DefaultInstance;
                     // where app is a Firebase.FirebaseApp property of your application class.
 
                     // Set a flag here indicating that Firebase is ready to use by your
                     // application.
+                    auth = FirebaseAuth.DefaultInstance;
                 }
                 else
                 {
-                    UnityEngine.Debug.LogError(System.String.Format(
+                    Debug.LogError(System.String.Format(
                       "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
                     // Firebase Unity SDK is not safe to use here.
                 }
-
-                Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
             });
+        }
+
+        internal void StartLogin(string username, string password)
+        {
+            auth.SignInWithEmailAndPasswordAsync(username, password).ContinueWith(task =>
+            {
+                onAuthRequest(task);
+            });
+        }
+
+        internal void RegisterNewUser(string username, string password)
+        {
+            auth.CreateUserWithEmailAndPasswordAsync(username, password).ContinueWith(task =>
+            {
+                onAuthRequest(task);
+            });
+        }
+
+        private void onAuthRequest(System.Threading.Tasks.Task<FirebaseUser> task)
+        {
+            if (task.IsCanceled)
+            {
+                Debug.LogError("Creating new account was cancelled...");
+                return;
+            }
+
+            if (task.IsFaulted)
+            {
+                Debug.LogError("Registration error: " + task.Exception);
+                return;
+            }
+            currentUser = task.Result;
+            OnAuthenticationSuccess(currentUser);
         }
     }
 }
