@@ -8,6 +8,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
     public class AuthController : MonoBehaviour
     {
         public Action<FirebaseUser> OnAuthenticationSuccess { get; internal set; }
+        public Action OnFirebaseReady { get; internal set; }
 
         private FirebaseApp app;
         private FirebaseAuth auth;
@@ -27,6 +28,8 @@ namespace DraconianMarshmallows.FirebaseAuthUI
                     // Set a flag here indicating that Firebase is ready to use by your
                     // application.
                     auth = FirebaseAuth.DefaultInstance;
+                    OnFirebaseReady(); 
+                    //Debug.Log("Loaded firebase dependencies...");
                 }
                 else
                 {

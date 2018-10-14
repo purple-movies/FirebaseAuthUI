@@ -13,7 +13,8 @@ namespace DraconianMarshmallows.FirebaseAuthUI
      */
     public class AuthUIController : UIBehavior
     {
-        [SerializeField] private AuthController authController; 
+        [SerializeField] private AuthController authController;
+        [SerializeField] private GameObject loadingUI; 
         [SerializeField] private GameObject entryPoint;
         [SerializeField] private GameObject registrationPanel;
         [SerializeField] private UNPWEntryController loginUI; 
@@ -23,12 +24,19 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         protected override void Start()
         {
             base.Start();
-            authController.OnAuthenticationSuccess += onRegistrationSuccessful; 
+            authController.OnAuthenticationSuccess += onRegistrationSuccessful;
+            authController.OnFirebaseReady += onFirebaseReady; 
 
             loginUI.OnProceed += onStartLogin;
             loginUI.OnNavigation += onClickRegistration;
             registrationUI.OnProceed += onStartRegistration; 
             registrationUI.OnNavigation += onCancelRegistration;
+        }
+
+        private void onFirebaseReady()
+        {
+            Debug.Log("Firebase is ready...");
+            loadingUI.SetActive(false);
         }
 
         private void onStartLogin(string username, string password)
@@ -45,7 +53,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
         private void onRegistrationSuccessful(FirebaseUser firebaseUser)
         {
-            Debug.Log("Registration successful..."); 
+            Debug.Log("Authentication successful : " + firebaseUser.UserId); 
         }
 
         #region Navigation Callbacks
@@ -57,8 +65,6 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
         private void onClickRegistration()
         {
-            Debug.Log("Cliced register !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
             entryPoint.SetActive(false);
             registrationPanel.SetActive(true);
         }

@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!224 &7362440053799463047 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3270538326916517427, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
-  m_PrefabInstance: {fileID: 5426817207180715700}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &714779096978637179 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4802115601649805263, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
-  m_PrefabInstance: {fileID: 5426817207180715700}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90bf04378cd013d4ba6f9869de0b805e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &7131873039581461559 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3270538326916517427, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
@@ -32,6 +16,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90bf04378cd013d4ba6f9869de0b805e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &7362440053799463047 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3270538326916517427, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
+  m_PrefabInstance: {fileID: 5426817207180715700}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7362440053880256508
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,6 +99,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Sign Up with an email address and a password...
+--- !u!114 &714779096978637179 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4802115601649805263, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
+  m_PrefabInstance: {fileID: 5426817207180715700}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90bf04378cd013d4ba6f9869de0b805e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7362440054931285296
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +226,7 @@ MonoBehaviour:
   emailInput: {fileID: 714779096978637179}
   passwordInput: {fileID: 954274164442289611}
   confirmButton: {fileID: 0}
-  cancelButton: {fileID: 0}
+  navigationButton: {fileID: 0}
 --- !u!1001 &5426817207180715700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -329,6 +329,18 @@ PrefabInstance:
     - target: {fileID: 3270538327828981105, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
       propertyPath: m_Name
       value: EmailTextInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802115601649805263, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
+      propertyPath: m_ContentType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802115601649805263, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
+      propertyPath: m_KeyboardType
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802115601649805263, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
+      propertyPath: m_CharacterValidation
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8356739081849204956, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
@@ -435,6 +447,14 @@ PrefabInstance:
     - target: {fileID: 3270538327828981105, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
       propertyPath: m_Name
       value: PasswordTextInput
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802115601649805263, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
+      propertyPath: m_ContentType
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802115601649805263, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
+      propertyPath: m_InputType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e46e6a08c20d9f7438b64e8ce9cee1a7, type: 3}
