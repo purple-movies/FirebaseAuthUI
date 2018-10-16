@@ -45,18 +45,14 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
         internal void StartLogin(string username, string password)
         {
-            auth.SignInWithEmailAndPasswordAsync(username, password).ContinueWith(task =>
-            {
-                onAuthRequest(task);
-            });
+            auth.SignInWithEmailAndPasswordAsync(username, password)
+                .ContinueWith(task => onAuthRequest(task));
         }
 
         internal void RegisterNewUser(string username, string password)
         {
-            auth.CreateUserWithEmailAndPasswordAsync(username, password).ContinueWith(task =>
-            {
-                onAuthRequest(task);
-            });
+            auth.CreateUserWithEmailAndPasswordAsync(username, password)
+                .ContinueWith(task => onAuthRequest(task));
         }
 
         private void onAuthRequest(System.Threading.Tasks.Task<FirebaseUser> task)
@@ -69,7 +65,8 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
             if (task.IsFaulted)
             {
-                Debug.LogError("Registration error: " + task.Exception);
+                Type type = task.Exception.InnerException.GetType();
+                Debug.LogError("Registration error: " + type);
                 return;
             }
             currentUser = task.Result;

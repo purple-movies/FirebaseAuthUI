@@ -14,12 +14,13 @@ namespace DraconianMarshmallows.FirebaseAuthUI
     public class AuthUIController : UIBehavior
     {
         [SerializeField] private AuthController authController;
-        [SerializeField] private GameObject loadingUI; 
-        [SerializeField] private GameObject entryPoint;
-        [SerializeField] private GameObject registrationPanel;
+        [SerializeField] private GameObject loadingUI;
+        [SerializeField] private Text loadingText;
+        [SerializeField] private GameObject entryPoint; 
+        [SerializeField] private GameObject registrationPanel; 
         [SerializeField] private UNPWEntryController loginUI; 
-        [SerializeField] private UNPWEntryController registrationUI;
-        [SerializeField] private Button registrationLink;
+        [SerializeField] private UNPWEntryController registrationUI; 
+        [SerializeField] private Button registrationLink; 
 
         protected override void Start()
         {
@@ -43,19 +44,31 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
         private void onStartLogin(string username, string password)
         {
-            Debug.Log("TODO::: On log in !");
+            showLoading("Signing in...");
             authController.StartLogin(username, password); 
         }
 
         private void onStartRegistration(string username, string password)
         {
-            Debug.Log("Start registration...");
+            showLoading("Signing up for account..."); 
             authController.RegisterNewUser(username, password);
         }
 
         private void onRegistrationSuccessful(FirebaseUser firebaseUser)
         {
-            Debug.Log("Authentication successful : " + firebaseUser.UserId); 
+            Debug.Log("Authentication successful : " + firebaseUser.UserId);
+            hideLoading();
+        }
+
+        private void showLoading(string message)
+        {
+            loadingText.text = message;
+            loadingUI.SetActive(true);
+        }
+
+        private void hideLoading()
+        {
+            loadingUI.SetActive(false);
         }
 
         #region Navigation Callbacks

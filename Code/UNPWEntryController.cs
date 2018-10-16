@@ -24,12 +24,12 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         protected override void Start()
         {
             base.Start();
-            emailInput.onValueChanged.AddListener(onEmailChanged); 
+            emailInput.onValueChanged.AddListener(validateEmail); 
             confirmButton.onClick.AddListener(onClickProceed);
             navigationButton.onClick.AddListener(onClickNavigation);
         }
 
-        private void onEmailChanged(string email)
+        private void validateEmail(string email)
         {
             if (emailValid = isValidEmail(email))
                 emailInput.HideError();
@@ -39,11 +39,22 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
         private void onClickProceed()
         {
+            bool validationPassed = true;
+            passwordInput.HideError();
+            validateEmail(emailInput.text);
+
+            if (passwordInput.text == "")
+            {
+                passwordInput.ShowError("Please enter your password");
+                validationPassed = false;
+            }
+
             if (!emailValid)
             {
-                Debug.Log("Invalid email address...");
-                return; 
+                validationPassed = false;
             }
+
+            if (!validationPassed) return; 
             OnProceed(emailInput.text, passwordInput.text);
         }
 
