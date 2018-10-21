@@ -49,10 +49,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
                 validationPassed = false;
             }
 
-            if (!emailValid)
-            {
-                validationPassed = false;
-            }
+            if (!emailValid) validationPassed = false;
 
             if (!validationPassed) return; 
             OnProceed(emailInput.text, passwordInput.text);

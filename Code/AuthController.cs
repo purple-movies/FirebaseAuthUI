@@ -7,8 +7,18 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 {
     public class AuthController : MonoBehaviour
     {
+        #region Event Callbacks
         public Action<FirebaseUser> OnAuthenticationSuccess { get; internal set; }
         public Action OnFirebaseReady { get; internal set; }
+        public Action OnInvalidPasswordForUser { get; internal set; }
+        public Action OnUnexpectedError { get; internal set; }
+        public Action OnInvalidEmailFormat { get; internal set; }
+        public Action OnMissingPassword { get; internal set; }
+        public Action OnPasswordTooWeak { get; internal set; }
+        public Action OnNetworkError { get; internal set; }
+        public Action OnAccountDisabled { get; internal set; }
+        public Action OnAccountNotFound { get; internal set; }
+        #endregion
         public bool FirebaseReady { get; private set; }
 
         private FirebaseApp app;
@@ -65,12 +75,41 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
             if (task.IsFaulted)
             {
-                Type type = task.Exception.InnerException.GetType();
-                Debug.LogError("Registration error: " + type);
+                foreach(var innerException in task.Exception.InnerExceptions)
+                    handleAuthException(innerException as FirebaseException); 
+
                 return;
             }
             currentUser = task.Result;
             OnAuthenticationSuccess(currentUser);
+        }
+
+        private void handleAuthException(FirebaseException firebaseException)
+        {
+            switch ((AuthError) firebaseException.ErrorCode)
+            {
+                case AuthError.WrongPassword:
+                case AuthError.EmailAlreadyInUse:
+                case AuthError.AccountExistsWithDifferentCredentials:
+                    OnInvalidPasswordForUser();
+                    break;
+                case AuthError.InvalidEmail:
+                case AuthError.MissingEmail:
+                    OnInvalidEmailFormat();
+                    break;
+                case AuthError.MissingPassword: OnMissingPassword();
+                    break;
+                case AuthError.WeakPassword: OnPasswordTooWeak();
+                    break;
+                case AuthError.UserNotFound: OnAccountNotFound();
+                    break;
+                case AuthError.NetworkRequestFailed: OnNetworkError();
+                    break;
+                case AuthError.UserDisabled: OnAccountDisabled();
+                    break; 
+                default: OnUnexpectedError();
+                    break;
+            }
         }
     }
 }

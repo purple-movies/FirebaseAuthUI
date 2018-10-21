@@ -1,0 +1,13 @@
+{
+    "translation": {
+		"signing_in": "Signing in...", 
+		"unexpected_error_occured": "An unexpected error occured.",
+        "passwords_too_weak": "The password you entered is too weak.",
+		"network_error": "There was a network error. Please check you have internet acccess.", 
+		"missing_password": "Please enter a password.",
+		"invalid_email_for_user": "The email address is not associated with this user.", 
+		"invalid_email_format": "The email address provided was not correctly formatted.", 
+		"account_not_found": "There's no account associated with this email.", 
+		"account_disabled": "Your account has been disabled."
+    }
+}
