@@ -1,5 +1,6 @@
 {
     "translation": {
+		"ok": "OK", 
 		"signing_in": "Signing in...", 
 		"unexpected_error_occured": "An unexpected error occured.",
         "passwords_too_weak": "The password you entered is too weak.",

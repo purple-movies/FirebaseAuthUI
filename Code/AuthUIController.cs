@@ -22,6 +22,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         [SerializeField] private UNPWEntryController loginUI; 
         [SerializeField] private UNPWEntryController registrationUI; 
         [SerializeField] private Button registrationLink;
+        [SerializeField] private Modal modal; 
 
         private UNPWEntryController currentUNPWEntry;
         private Localizer localizer; 
@@ -29,10 +30,10 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         protected override void Start()
         {
             base.Start();
-            // TODO:: plug in other localized strings - everything's in EN-US.
+            // TODO:: plug in other localized strings - everything's in EN-US right now. 
             localizer = Localizer.GetInstance("Localization/firebase_auth_enus", "Localization/firebase_auth_enus");
 
-            Debug.Log("TEST:: " + localizer.GetLocalized("signing_in"));
+            modal.SetDismissButton(localizer.GetLocalized("ok")); 
 
             authController.OnFirebaseReady += onFirebaseReady;
             authController.OnAuthenticationSuccess += onRegistrationSuccessful;
@@ -62,12 +63,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
             Debug.Log("Firebase is ready...");
             loadingUI.SetActive(false);
         }
-
-        private void showErrorDialog(string message)
-        {
-            Debug.LogWarningFormat("Show error message:: %s", message); 
-        }
-
+        
         #region Authentication Process
         private void onStartLogin(string username, string password)
         {
@@ -107,42 +103,42 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         #region Error Handlers
         private void onUnexpectedError()
         {
-            showErrorDialog(localizer.GetLocalized("unexpected_error_occured")); 
+            modal.ShowInfoMessage(localizer.GetLocalized("unexpected_error_occured")); 
         }
 
         private void onPasswordTooWeak()
         {
-            showErrorDialog(localizer.GetLocalized("passwords_too_weak"));
+            modal.ShowInfoMessage(localizer.GetLocalized("passwords_too_weak"));
         }
 
         private void onNetworkError()
         {
-            throw new NotImplementedException();
+            modal.ShowInfoMessage(localizer.GetLocalized("network_error"));
         }
 
         private void onMissingPassword()
         {
-            throw new NotImplementedException();
+            modal.ShowInfoMessage(localizer.GetLocalized("missing_password"));
         }
 
         private void onInvalidEmailForUser()
         {
-            throw new NotImplementedException();
+            modal.ShowInfoMessage(localizer.GetLocalized("invalid_email_for_user"));
         }
 
         private void onInvalidEmailFormat()
         {
-            throw new NotImplementedException();
+            modal.ShowInfoMessage(localizer.GetLocalized("invalid_email_format"));
         }
 
         private void onAccountNotFound()
         {
-            throw new NotImplementedException();
+            modal.ShowInfoMessage(localizer.GetLocalized("account_not_found"));
         }
 
         private void onAccountDisabled()
         {
-            throw new NotImplementedException();
+            modal.ShowInfoMessage(localizer.GetLocalized("account_disabled"));
         }
         #endregion
 
