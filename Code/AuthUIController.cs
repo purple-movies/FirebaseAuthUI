@@ -30,11 +30,17 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         protected override void Start()
         {
             base.Start();
+
+            #region Initial Localization
             // TODO:: plug in other localized strings - everything's in EN-US right now. 
             localizer = Localizer.GetInstance("Localization/firebase_auth_enus", "Localization/firebase_auth_enus");
 
-            modal.SetDismissButton(localizer.GetLocalized("ok")); 
+            modal.SetDismissButton(localizer.GetLocalized("ok"));
+            loginUI.Localizer = localizer; 
+            registrationUI.Localizer = localizer; 
+            #endregion
 
+            authController.OnInitializingFirebase += onInitializingFirebase; 
             authController.OnFirebaseReady += onFirebaseReady;
             authController.OnAuthenticationSuccess += onRegistrationSuccessful;
 
@@ -56,6 +62,12 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
             if (authController.FirebaseReady) onFirebaseReady();
             currentUNPWEntry = loginUI; 
+        }
+
+        private void onInitializingFirebase()
+        {
+            Debug.Log("Initializing firebase!!!!!"); 
+            loadingUI.SetActive(true);
         }
 
         private void onFirebaseReady()

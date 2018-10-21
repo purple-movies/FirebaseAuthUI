@@ -9,7 +9,9 @@ namespace DraconianMarshmallows.FirebaseAuthUI
     {
         #region Event Callbacks
         public Action<FirebaseUser> OnAuthenticationSuccess { get; internal set; }
+        public Action OnInitializingFirebase { get; internal set; }
         public Action OnFirebaseReady { get; internal set; }
+
         public Action OnInvalidPasswordForUser { get; internal set; }
         public Action OnUnexpectedError { get; internal set; }
         public Action OnInvalidEmailFormat { get; internal set; }
@@ -19,6 +21,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         public Action OnAccountDisabled { get; internal set; }
         public Action OnAccountNotFound { get; internal set; }
         #endregion
+
         public bool FirebaseReady { get; private set; }
 
         private FirebaseApp app;
@@ -28,10 +31,11 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
         protected virtual void Start()
         {
-            Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+            if (OnInitializingFirebase != null) OnInitializingFirebase(); 
+            FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
             {
                 var dependencyStatus = task.Result;
-                if (dependencyStatus == Firebase.DependencyStatus.Available)
+                if (dependencyStatus == DependencyStatus.Available)
                 {
                     // Create and hold a reference to your FirebaseApp, i.e.
                     app = Firebase.FirebaseApp.DefaultInstance;
@@ -46,7 +50,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
                 }
                 else
                 {
-                    Debug.LogError(System.String.Format(
+                    Debug.LogError(string.Format(
                       "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
                     // Firebase Unity SDK is not safe to use here.
                 }

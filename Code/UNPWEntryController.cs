@@ -31,10 +31,8 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
         private void validateEmail(string email)
         {
-            if (emailValid = isValidEmail(email))
-                emailInput.HideError();
-            else
-                emailInput.ShowError("Please provide a valid email address");
+            if (emailValid = isValidEmail(email)) emailInput.HideError();
+            else emailInput.ShowError(Localizer.GetLocalized("invalid_email_format"));
         }
 
         private void onClickProceed()
@@ -45,7 +43,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
             if (passwordInput.text == "")
             {
-                passwordInput.ShowError("Please enter your password");
+                passwordInput.ShowError(Localizer.GetLocalized("missing_password"));
                 validationPassed = false;
             }
 
