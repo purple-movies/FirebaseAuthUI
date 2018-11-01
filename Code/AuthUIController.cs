@@ -9,40 +9,33 @@ using UnityEngine.UI;
 
 namespace DraconianMarshmallows.FirebaseAuthUI
 {
-    /**
-     * Main UI controller for Firebase Authentication UI.  
-     */
-    public class AuthUIController : UIBehavior
+    /// <summary> Main UI controller for Firebase Authentication UI. </summary>
+    public class AuthUIController : ParentUIController
     {
+        #region Inspector Fields
         [SerializeField] private AuthController authController;
+
+        [SerializeField] private GameObject entryPoint;
+        [SerializeField] private GameObject registrationPanel;
         [SerializeField] private GameObject loadingUI;
         [SerializeField] private Text loadingText;
-        [SerializeField] private GameObject entryPoint; 
-        [SerializeField] private GameObject registrationPanel; 
+ 
         [SerializeField] private UNPWEntryController loginUI; 
         [SerializeField] private UNPWEntryController registrationUI; 
-        [SerializeField] private Button registrationLink;
-        [SerializeField] private Modal modal; 
-
+        [SerializeField] private Modal modal;
+        #endregion
         private UNPWEntryController currentUNPWEntry;
-        private Localizer localizer; 
 
         protected override void Start()
         {
             base.Start();
+            initializeLocalization(); 
 
-            #region Initial Localization
-            // TODO:: plug in other localized strings - everything's in EN-US right now. 
-            localizer = Localizer.GetInstance("Localization/firebase_auth_enus", "Localization/firebase_auth_enus");
-
-            modal.SetDismissButton(localizer.GetLocalized("ok"));
-            loginUI.Localizer = localizer; 
-            registrationUI.Localizer = localizer; 
-            #endregion
-
+            #region Auth Controller Callbacks
             authController.OnInitializingFirebase += onInitializingFirebase; 
             authController.OnFirebaseReady += onFirebaseReady;
             authController.OnAuthenticationSuccess += onRegistrationSuccessful;
+            #endregion
 
             #region Error Handlers
             authController.OnAccountDisabled += onAccountDisabled;
@@ -52,16 +45,38 @@ namespace DraconianMarshmallows.FirebaseAuthUI
             authController.OnMissingPassword += onMissingPassword;
             authController.OnNetworkError += onNetworkError;
             authController.OnPasswordTooWeak += onPasswordTooWeak; 
-            authController.OnUnexpectedError += onUnexpectedError; 
+            authController.OnUnexpectedError += onUnexpectedError;
             #endregion
 
+            #region UI Callbacks
             loginUI.OnProceed += onStartLogin;
             loginUI.OnNavigation += onClickRegistration;
             registrationUI.OnProceed += onStartRegistration; 
             registrationUI.OnNavigation += onCancelRegistration;
+            #endregion
 
             if (authController.FirebaseReady) onFirebaseReady();
             currentUNPWEntry = loginUI; 
+        }
+
+        private void initializeLocalization()
+        {
+            // TODO:: plug in other localized strings - everything's in EN-US right now. 
+            localizer = Localizer.GetInstance("Localization/firebase_auth_enus", "Localization/firebase_auth_enus");
+
+            // Initialize generic: 
+            modal.Initialize(this); 
+            loginUI.Initialize(this); 
+            registrationUI.Initialize(this);
+
+            // Override any generic localization:
+            loginUI.PromptMessage = localizer.GetLocalized("sign_in_with_email_and_password");
+            loginUI.ConfirmButtonLabel = localizer.GetLocalized("log_in"); 
+            loginUI.NavigationButtonLabel = localizer.GetLocalized("or_register"); 
+
+            registrationUI.PromptMessage = localizer.GetLocalized("sign_up_with_email_and_password");
+            registrationUI.ConfirmButtonLabel = localizer.GetLocalized("continue");
+            registrationUI.NavigationButtonLabel = localizer.GetLocalized("cancel");
         }
 
         private void onInitializingFirebase()

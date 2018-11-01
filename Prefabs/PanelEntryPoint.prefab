@@ -1,47 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!224 &6889542717749460531 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7362440054931285297, guid: 13ce03b470b00ed4b9d61b8699afa000, type: 3}
-  m_PrefabInstance: {fileID: 4156882524101712642}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1392595978297791669 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5275580491909524939, guid: b010e618653c24d499c2864cdad6e3d1, type: 3}
-  m_PrefabInstance: {fileID: 6513856701289773438}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1392595978297791668 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5275580491909524938, guid: b010e618653c24d499c2864cdad6e3d1, type: 3}
-  m_PrefabInstance: {fileID: 6513856701289773438}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1002138842573621989 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4055854375406683793, guid: 09020bfb2d8ff344d828f4ae8da9dd70, type: 3}
   m_PrefabInstance: {fileID: 3864376446934617204}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1002138842573621988 stripped
+--- !u!114 &8369101278812927939 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4055854375406683792, guid: 09020bfb2d8ff344d828f4ae8da9dd70, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4720899009353743287, guid: 09020bfb2d8ff344d828f4ae8da9dd70, type: 3}
   m_PrefabInstance: {fileID: 3864376446934617204}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: d9bd9d85350aeb245a4f7b4f20638760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &4977629602316416893 stripped
+--- !u!224 &1392595978297791669 stripped
 RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2286709663501585224, guid: c8269331c9f0b8349a2b8b48f92ebefe, type: 3}
-  m_PrefabInstance: {fileID: 6532490582038608949}
+  m_CorrespondingSourceObject: {fileID: 5275580491909524939, guid: b010e618653c24d499c2864cdad6e3d1, type: 3}
+  m_PrefabInstance: {fileID: 6513856701289773438}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7682635308294367635 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3529672240556593389, guid: b010e618653c24d499c2864cdad6e3d1, type: 3}
+  m_PrefabInstance: {fileID: 6513856701289773438}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9bd9d85350aeb245a4f7b4f20638760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1643138278305438076
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +230,16 @@ MonoBehaviour:
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   verticle: 0
+--- !u!224 &6889542717749460531 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7362440054931285297, guid: 13ce03b470b00ed4b9d61b8699afa000, type: 3}
+  m_PrefabInstance: {fileID: 4156882524101712642}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &4977629602316416893 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2286709663501585224, guid: c8269331c9f0b8349a2b8b48f92ebefe, type: 3}
+  m_PrefabInstance: {fileID: 6532490582038608949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8068079802299990414
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,11 +650,11 @@ PrefabInstance:
     - target: {fileID: 255941795006310210, guid: 13ce03b470b00ed4b9d61b8699afa000, type: 3}
       propertyPath: confirmButton
       value: 
-      objectReference: {fileID: 1392595978297791668}
+      objectReference: {fileID: 7682635308294367635}
     - target: {fileID: 255941795006310210, guid: 13ce03b470b00ed4b9d61b8699afa000, type: 3}
       propertyPath: navigationButton
       value: 
-      objectReference: {fileID: 1002138842573621988}
+      objectReference: {fileID: 8369101278812927939}
     - target: {fileID: 7362440053880256482, guid: 13ce03b470b00ed4b9d61b8699afa000, type: 3}
       propertyPath: m_Text
       value: Log in with an email address and a password...

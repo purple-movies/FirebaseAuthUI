@@ -1,4 +1,5 @@
 ﻿using DraconianMarshmallows.UI;
+using DraconianMarshmallows.UI.Localization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,28 +12,47 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 {
     public class UNPWEntryController : UIBehavior
     {
+        [SerializeField] private Text promptMessage; 
         [SerializeField] private TextInput emailInput;
         [SerializeField] private TextInput passwordInput;
-        [SerializeField] private Button confirmButton;
-        [SerializeField] private Button navigationButton;
+        [SerializeField] private ButtonPlus confirmButton;
+        [SerializeField] private ButtonPlus navigationButton;
 
         public Action<string, string> OnProceed { get; internal set; }
         public Action OnNavigation { get; internal set; }
 
+        public string PromptMessage { set { promptMessage.text = value; } }
+        public string ConfirmButtonLabel { set { confirmButton.LabelText = value; } }
+        public string NavigationButtonLabel {  set { navigationButton.LabelText = value; } }
+
+        private Localizer localizer; 
         private bool emailValid = false;
 
-        protected override void Start()
+        public override void Initialize(IParentUIController parentUIController)
         {
-            base.Start();
-            emailInput.onValueChanged.AddListener(validateEmail); 
+            base.Initialize(parentUIController);
+            initializeEventCallbacks();
+            initializeLocalization(parentUIController);
+        }
+
+        private void initializeEventCallbacks()
+        {
+            emailInput.onValueChanged.AddListener(validateEmail);
             confirmButton.onClick.AddListener(onClickProceed);
             navigationButton.onClick.AddListener(onClickNavigation);
+        }
+
+        private void initializeLocalization(IParentUIController parentUIController)
+        {
+            localizer = parentUIController.GetLocalizer();
+            emailInput.PlaceHolder = localizer.GetLocalized("enter_email_address");
+            passwordInput.PlaceHolder = localizer.GetLocalized("enter_password");
         }
 
         private void validateEmail(string email)
         {
             if (emailValid = isValidEmail(email)) emailInput.HideError();
-            else emailInput.ShowError(Localizer.GetLocalized("invalid_email_format"));
+            else emailInput.ShowError(localizer.GetLocalized("invalid_email_format"));
         }
 
         private void onClickProceed()
@@ -43,7 +63,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
             if (passwordInput.text == "")
             {
-                passwordInput.ShowError(Localizer.GetLocalized("missing_password"));
+                passwordInput.ShowError(localizer.GetLocalized("missing_password"));
                 validationPassed = false;
             }
 

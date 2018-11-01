@@ -1,7 +1,18 @@
 {
     "translation": {
+		"login_with_email_and_password": "Log in with an email address and password...", 
+		"sign_in_with_email_and_password": "Sign in with email and password...", 
+		"sign_up_with_email_and_password": "Sign up in with email and password...", 
+
 		"ok": "OK", 
+		"continue": "Continue", 
+		"cancel": "Cancel", 
+		"log_in": "Log in",
+		"or_register": "Or register...",
 		"signing_in": "Signing in...", 
+		"enter_email_address": "Enter email address",
+		"enter_password": "Enter Password", 
+
 		"unexpected_error_occured": "An unexpected error occured.",
         "passwords_too_weak": "The password you entered is too weak.",
 		"network_error": "There was a network error. Please check you have internet acccess.", 
