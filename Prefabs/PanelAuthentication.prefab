@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &125106843034655998
 RectTransform:
   m_ObjectHideFlags: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Loading...
+  m_Text: 
 --- !u!114 &1829879574904770933 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1271026857252689990, guid: 4115dc2dedffbd042bc5b88adbccd101, type: 3}

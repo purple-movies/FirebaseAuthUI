@@ -24,6 +24,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         [SerializeField] private UNPWEntryController registrationUI; 
         [SerializeField] private Modal modal;
         #endregion
+
         private UNPWEntryController currentUNPWEntry;
 
         protected override void Start()
@@ -35,6 +36,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
             authController.OnInitializingFirebase += onInitializingFirebase; 
             authController.OnFirebaseReady += onFirebaseReady;
             authController.OnAuthenticationSuccess += onRegistrationSuccessful;
+            authController.OnFirebaseInitializationFailure += onFirebaseInitializationFailure; 
             #endregion
 
             #region Error Handlers
@@ -64,7 +66,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
             // TODO:: plug in other localized strings - everything's in EN-US right now. 
             localizer = Localizer.GetInstance("Localization/firebase_auth_enus", "Localization/firebase_auth_enus");
 
-            // Initialize generic: 
+            // Initialize controllers with generic localization: 
             modal.Initialize(this); 
             loginUI.Initialize(this); 
             registrationUI.Initialize(this);
@@ -81,14 +83,21 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
         private void onInitializingFirebase()
         {
-            Debug.Log("Initializing firebase!!!!!"); 
-            loadingUI.SetActive(true);
+            Debug.Log("Initializing firebase!!!!!");
+            //loadingUI.SetActive(true);
+            showLoading(localizer.GetLocalized("loading"));
+        }
+
+        private void onFirebaseInitializationFailure()
+        {
+            showLoading("Failed to initialize Server..."); 
         }
 
         private void onFirebaseReady()
         {
             Debug.Log("Firebase is ready...");
-            loadingUI.SetActive(false);
+            //loadingUI.SetActive(false);
+            hideLoading(); 
         }
         
         #region Authentication Process
@@ -171,13 +180,19 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
         private void showLoading(string message)
         {
-            loadingText.text = message;
-            loadingUI.SetActive(true);
+            Debug.Log("showing loading !!!");
+            //loadingText.text = message;
+            //loadingUI.SetActive(true);
+
+            modal.ShowWaitingMessage(message);
         }
 
         private void hideLoading()
         {
-            loadingUI.SetActive(false);
+            Debug.Log("hiding loading ...");
+            //loadingUI.SetActive(false);
+
+            modal.Dismiss(); 
         }
     }
 }
