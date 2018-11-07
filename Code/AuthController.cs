@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Firebase;
 using Firebase.Auth;
 using UnityEngine;
@@ -29,9 +30,12 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         private FirebaseAuth auth;
 
         private FirebaseUser currentUser;
+        private bool firebaseInitialized; 
 
         protected virtual void Start()
         {
+            StartCoroutine(waitForFirebase());
+
             if (OnInitializingFirebase != null) OnInitializingFirebase(); 
 
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
@@ -46,7 +50,9 @@ namespace DraconianMarshmallows.FirebaseAuthUI
                     // Set a flag here indicating that Firebase is ready to use by your application.
                     auth = FirebaseAuth.DefaultInstance;
                     FirebaseReady = true; 
-                    OnFirebaseReady(); 
+                    // Let Coroutine check this for callback ...
+
+                    //OnFirebaseReady(); 
                     //Debug.Log("Loaded firebase dependencies...");
                 }
                 else
@@ -70,6 +76,16 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         {
             auth.CreateUserWithEmailAndPasswordAsync(username, password)
                 .ContinueWith(task => onAuthRequest(task));
+        }
+
+        private IEnumerator waitForFirebase()
+        {
+            while ( ! FirebaseReady)
+            {
+                yield return new WaitForEndOfFrame();
+                Debug.Log("Waiting for firebase .....");
+            }
+            OnFirebaseReady(); 
         }
 
         private void onAuthRequest(System.Threading.Tasks.Task<FirebaseUser> task)
