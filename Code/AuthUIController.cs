@@ -84,7 +84,6 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         private void onInitializingFirebase()
         {
             Debug.Log("Initializing firebase!!!!!");
-            //loadingUI.SetActive(true);
             showLoading(localizer.GetLocalized("loading"));
         }
 
@@ -96,7 +95,6 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         private void onFirebaseReady()
         {
             Debug.Log("Firebase is ready...");
-            //loadingUI.SetActive(false);
             hideLoading(); 
         }
         
@@ -113,7 +111,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
             authController.RegisterNewUser(username, password);
         }
 
-        private void onRegistrationSuccessful(FirebaseUser firebaseUser)
+        private void onRegistrationSuccessful(FirebaseUser firebaseUser, bool newUserRegistration)
         {
             Debug.Log("Authentication successful : " + firebaseUser.UserId);
             hideLoading();
@@ -181,17 +179,12 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         private void showLoading(string message)
         {
             Debug.Log("showing loading !!!");
-            //loadingText.text = message;
-            //loadingUI.SetActive(true);
-
             modal.ShowWaitingMessage(message);
         }
 
         private void hideLoading()
         {
             Debug.Log("hiding loading ...");
-            //loadingUI.SetActive(false);
-
             modal.Dismiss(); 
         }
     }

@@ -9,7 +9,7 @@ namespace DraconianMarshmallows.FirebaseAuthUI
     public class AuthController : MonoBehaviour
     {
         #region Event Callbacks
-        public Action<FirebaseUser> OnAuthenticationSuccess { get; internal set; }
+        public Action<FirebaseUser, bool> OnAuthenticationSuccess { get; internal set; }
         public Action OnInitializingFirebase { get; internal set; }
         public Action OnFirebaseInitializationFailure { get; internal set; }
         public Action OnFirebaseReady { get; internal set; }
@@ -30,7 +30,8 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         private FirebaseAuth auth;
 
         private FirebaseUser currentUser;
-        private bool firebaseInitialized; 
+        private bool firebaseInitialized;
+        private bool newUserRegistration; 
 
         protected virtual void Start()
         {
@@ -68,12 +69,14 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
         internal void StartLogin(string username, string password)
         {
+            newUserRegistration = false;
             auth.SignInWithEmailAndPasswordAsync(username, password)
                 .ContinueWith(task => onAuthRequest(task));
         }
 
         internal void RegisterNewUser(string username, string password)
         {
+            newUserRegistration = true;
             auth.CreateUserWithEmailAndPasswordAsync(username, password)
                 .ContinueWith(task => onAuthRequest(task));
         }
@@ -104,7 +107,8 @@ namespace DraconianMarshmallows.FirebaseAuthUI
                 return;
             }
             currentUser = task.Result;
-            OnAuthenticationSuccess(currentUser);
+            Debug.Log("AuthController, Auth success:: \n" + currentUser.ToString());
+            OnAuthenticationSuccess(currentUser, newUserRegistration);
         }
 
         private void handleAuthException(FirebaseException firebaseException)
