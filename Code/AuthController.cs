@@ -8,6 +8,8 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 {
     public class AuthController : MonoBehaviour
     {
+        private const string TAG = "AuthController";
+
         #region Event Callbacks
         public Action<FirebaseUser, bool> OnAuthenticationSuccess { get; internal set; }
         public Action OnInitializingFirebase { get; internal set; }
@@ -37,24 +39,25 @@ namespace DraconianMarshmallows.FirebaseAuthUI
         {
             StartCoroutine(waitForFirebase());
 
-            if (OnInitializingFirebase != null) OnInitializingFirebase(); 
-
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
             {
                 var dependencyStatus = task.Result;
                 if (dependencyStatus == DependencyStatus.Available)
                 {
                     // Create and hold a reference to your FirebaseApp, i.e.
-                    app = Firebase.FirebaseApp.DefaultInstance;
+                    app = FirebaseApp.DefaultInstance;
                     // where app is a Firebase.FirebaseApp property of your application class.
 
                     // Set a flag here indicating that Firebase is ready to use by your application.
-                    auth = FirebaseAuth.DefaultInstance;
-                    FirebaseReady = true; 
+                    //auth = FirebaseAuth.DefaultInstance;
+                    //auth.StateChanged += onAuthenticationStateChanged;
+                    FirebaseReady = true;
                     // Let Coroutine check this for callback ...
 
-                    //OnFirebaseReady(); 
-                    //Debug.Log("Loaded firebase dependencies...");
+                    if (OnInitializingFirebase != null) OnInitializingFirebase();
+                    Debug.Log("Loaded firebase dependencies...");
+
+                    //onAuthenticationStateChanged(this, null);
                 }
                 else
                 {
@@ -62,9 +65,39 @@ namespace DraconianMarshmallows.FirebaseAuthUI
                     Debug.LogError(string.Format("Could not resolve all Firebase dependencies: {0}", dependencyStatus));
 
                     if (OnFirebaseInitializationFailure != null)
-                        OnFirebaseInitializationFailure(); 
+                    {
+                        OnFirebaseInitializationFailure();
+                        return;
+                    }
                 }
             });
+        }
+
+        private void onAuthenticationStateChanged(object sender, EventArgs e)
+        {
+            if (auth.CurrentUser != currentUser)
+            {
+                bool signedIn = currentUser != auth.CurrentUser && auth.CurrentUser != null;
+                if (!signedIn && currentUser != null)
+                {
+                    Debug.Log(TAG + ":: Signed out " + currentUser.UserId);
+                }
+
+                currentUser = auth.CurrentUser;
+                if (signedIn)
+                {
+                    Debug.Log(TAG + ":: Signed in " + currentUser.UserId);
+
+
+                    Debug.Log(TAG + ":: The user's already authenticated ... :: \n" + currentUser.ToString());
+                    OnAuthenticationSuccess(currentUser, newUserRegistration);
+
+
+                    //displayName = currentUser.DisplayName ?? "";
+                    //emailAddress = currentUser.Email ?? "";
+                    //photoUrl = currentUser.PhotoUrl ?? "";
+                }
+            }
         }
 
         internal void StartLogin(string username, string password)
@@ -88,6 +121,9 @@ namespace DraconianMarshmallows.FirebaseAuthUI
                 yield return new WaitForEndOfFrame();
                 Debug.Log("Waiting for firebase .....");
             }
+            auth = FirebaseAuth.DefaultInstance;
+            auth.StateChanged += onAuthenticationStateChanged;
+            onAuthenticationStateChanged(this, null);
             OnFirebaseReady(); 
         }
 
@@ -106,9 +142,9 @@ namespace DraconianMarshmallows.FirebaseAuthUI
 
                 return;
             }
-            currentUser = task.Result;
+            //currentUser = task.Result;
             Debug.Log("AuthController, Auth success:: \n" + currentUser.ToString());
-            OnAuthenticationSuccess(currentUser, newUserRegistration);
+            //OnAuthenticationSuccess(currentUser, newUserRegistration);
         }
 
         private void handleAuthException(FirebaseException firebaseException)
