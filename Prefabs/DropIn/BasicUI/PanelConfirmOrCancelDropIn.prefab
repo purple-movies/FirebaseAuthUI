@@ -11,9 +11,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: PanelConfirmOrCancelDropIn
       objectReference: {fileID: 0}
+    - target: {fileID: 807109406046018124}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 807109408121318215}
       propertyPath: m_SizeDelta.y
-      value: 80
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8339476407474073205}
       propertyPath: m_ChildAlignment
@@ -135,6 +139,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: PanelConfirmOrCancelDropIn
       objectReference: {fileID: 0}
+    - target: {fileID: 807109406046018125}
+      propertyPath: m_Name
+      value: PanelConfirmOrCancelDropIn
+      objectReference: {fileID: 0}
+    - target: {fileID: 807109408121318215}
+      propertyPath: m_SizeDelta.y
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339476407474073205}
+      propertyPath: m_ChildAlignment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339476407474073205}
+      propertyPath: m_Spacing
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339476407474073205}
+      propertyPath: m_ChildForceExpandWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339476407474073205}
+      propertyPath: m_ChildForceExpandHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339476407474073205}
+      propertyPath: m_ChildControlWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8339476407474073205}
+      propertyPath: m_ChildControlHeight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8339476407474073205}
       propertyPath: m_ChildAlignment
       value: 0
@@ -212,10 +248,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: PanelConfirmOrCancelDropIn
       objectReference: {fileID: 0}
+    - target: {fileID: 6418385258304657646, guid: 4115dc2dedffbd042bc5b88adbccd101,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6418385256932960741, guid: 4115dc2dedffbd042bc5b88adbccd101,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 80
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2421255737681095895, guid: 4115dc2dedffbd042bc5b88adbccd101,
         type: 3}
